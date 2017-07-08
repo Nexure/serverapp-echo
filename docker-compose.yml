@@ -1,0 +1,20 @@
+version: '2'
+services:
+    serverapp:
+        build: .
+        volumes: 
+            - ./src/:/go/src/github.com/rewiko/app
+        links:
+            - cassandra
+        depends_on:
+            - cassandra
+        ports:
+            - "8080:8080"
+    cassandra:
+        image: cassandra:2.2
+        volumes: 
+            - ./cassandra-data:/var/lib/cassandra
+        ports:
+            - "9042:9042"
+
+
